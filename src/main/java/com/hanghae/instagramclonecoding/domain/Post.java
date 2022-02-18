@@ -29,10 +29,8 @@ public class Post extends Timestamped {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // 이미지
-    @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @JsonIgnoreProperties({"post"})
-    private List<Image> imageList;
+
+    private String imageUrl;
 
     // 댓글
     @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
