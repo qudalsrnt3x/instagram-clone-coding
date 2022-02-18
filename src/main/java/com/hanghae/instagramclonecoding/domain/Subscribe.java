@@ -12,7 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = {
+@Table(name = "subscribe",
+        uniqueConstraints = {
         @UniqueConstraint(
                 name = "subscribe_uk",
                 columnNames = {"from_user_id", "to_user_id"}
