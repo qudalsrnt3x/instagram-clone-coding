@@ -27,16 +27,6 @@ public class JwtTokenProvider { // 토큰 생성, 검증
     //토큰에 저장된 유저 정보를 활용해야 하기 때문에 CustomUserDetatilService 라는 이름의 클래스를 만들고 UserDetailsService를 상속받아 재정의 하는 과정을 진행합니다.
     private final UserDetailsService userDetailsService;
 
-    @PostConstruct // 서버가 돌아가면 제일 먼저 실행시키는 어노테이션
-    protected void init()
-    {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-
-
-
-
-    }
-
     // JWT 토큰 생성
     public String createToken(String userPk)
     {
@@ -46,11 +36,13 @@ public class JwtTokenProvider { // 토큰 생성, 검증
                 .setClaims(claims) // 정보 저장
                 .setIssuedAt(now) // 토큰 발행 시간 정보
                 .setExpiration(new Date(now.getTime() + tokenValidTime)) // set Expire Time
-                .signWith(SignatureAlgorithm.HS256, secretKey.getBytes())  // 사용할 암호화 알고리즘과
+                .signWith(SignatureAlgorithm.HS256, secretKey)  // 사용할 암호화 알고리즘과
 //                // signature 에 들어갈 secret값 세팅  => 사용 중단된 코드 Keys.hmacShakeyFor 사용
 //                .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()),SignatureAlgorithm.HS256)
                 .compact();
     }
+
+
 
     // JWT 토큰에서 인증 정보 조회
     public Authentication getAuthentication(String token)
@@ -64,8 +56,6 @@ public class JwtTokenProvider { // 토큰 생성, 검증
     public String getUserPk(String token)
     {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
-
-
     }
 
     // Request의 Header에서 token 값을 가져옵니다. "X-AUTH-TOKEN" : "TOKEN값'
@@ -75,9 +65,11 @@ public class JwtTokenProvider { // 토큰 생성, 검증
     }
 
     // 토큰의 유효성 + 만료일자 확인
-    public boolean validateToken(String jwtToken) {
+    public boolean validateToken(String jwtToken)
+    {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+
             return !claims.getBody().getExpiration().before(new Date());
         } catch (Exception e) {
             return false;

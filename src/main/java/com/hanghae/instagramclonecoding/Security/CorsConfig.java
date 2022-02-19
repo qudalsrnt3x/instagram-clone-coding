@@ -27,6 +27,7 @@ public class CorsConfig {
         config.addAllowedMethod("OPTION");
 
 
+
         source.registerCorsConfiguration("/user/**", config);
         source.registerCorsConfiguration("/post/**", config);
         source.registerCorsConfiguration("/like/**", config);
