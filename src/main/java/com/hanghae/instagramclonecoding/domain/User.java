@@ -1,7 +1,8 @@
 package com.hanghae.instagramclonecoding.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.hanghae.instagramclonecoding.domain.Dto.SignupRequestDto;
+import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.ProfileChangeRequestDto;
+import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.SignupRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -61,5 +62,16 @@ public class User extends Timestamped {
         this.website = "";
         this.gender = "";
         this.role = Role.USER;
+    }
+
+    public void update(ProfileChangeRequestDto requestDto)
+    {
+//        this.email = requestDto.getEmail();
+
+        this.nickname = requestDto.getNickname();
+        this.profileImageUrl = requestDto.getProfileImageUrl();
+        this.bio = requestDto.getBio();
+        this.website = requestDto.getWebsite();
+        this.phone = requestDto.getPhone();
     }
 }

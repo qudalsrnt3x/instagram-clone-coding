@@ -1,4 +1,4 @@
-package com.hanghae.instagramclonecoding.domain.Dto;
+package com.hanghae.instagramclonecoding.domain.Dto.ResponseDto;
 
 import lombok.Getter;
 import lombok.Setter;
