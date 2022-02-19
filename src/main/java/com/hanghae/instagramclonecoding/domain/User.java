@@ -3,6 +3,7 @@ package com.hanghae.instagramclonecoding.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.ProfileChangeRequestDto;
 import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.SignupRequestDto;
+import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
-public class User extends Timestamped {
+public class User<Post> extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

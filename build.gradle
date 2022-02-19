@@ -45,6 +45,8 @@ dependencies {
     implementation 'com.auth0:java-jwt:3.13.0'
 
 
+    //유효성 검사를 위한 validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
