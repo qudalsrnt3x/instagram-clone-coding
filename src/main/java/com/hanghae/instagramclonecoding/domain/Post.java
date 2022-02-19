@@ -28,7 +28,7 @@ public class Post extends Timestamped {
     @JoinColumn(name = "user_id")
     private User user;
 
-    //
+    @Column(name = "image_url")
     private String imageUrl;
 
     // 댓글

@@ -28,7 +28,7 @@ public class User extends Timestamped {
     @Column(nullable = false)
     private String bio; // 자기소개
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "profile_image_url")
     private String profileImageUrl; // 프로필 사진
 
     @Column(nullable = false)
