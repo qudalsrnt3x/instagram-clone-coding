@@ -1,6 +1,7 @@
 package com.hanghae.instagramclonecoding.posts.comment;
 
 
+import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.domain.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import com.hanghae.instagramclonecoding.posts.PostRepository;

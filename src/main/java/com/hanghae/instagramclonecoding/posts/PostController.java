@@ -1,6 +1,9 @@
 package com.hanghae.instagramclonecoding.posts;
 
+import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
+import com.hanghae.instagramclonecoding.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,7 +11,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-
 public class PostController {
 
 
@@ -20,11 +22,11 @@ public class PostController {
     @PostMapping("/api/post")
     public Post createPost(
             @RequestBody PostRequestDto postRequestDto,
-            UserDetailsImpl userDetails
+            @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
         User user = userDetails.getUser();
 
-        return PostService.createPost(postRequestDto, user);
+        return postService.createPost(postRequestDto, user);
     }
 
     // 게시글 조회
@@ -33,9 +35,11 @@ public class PostController {
         return postService.getPost();
     }
 
+
     //게시글 삭제
     @DeleteMapping("/api/post/{postId}")
-    public Long deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public Long deletePost(@PathVariable Long postId,
+                           @AuthenticationPrincipal UserDetailsImpl userDetails) {
         postService.deletePost(postId, userDetails);
         return postId;
     }
