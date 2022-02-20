@@ -28,6 +28,7 @@ public class CommentService {
             CommentRequestDto requestDto,
             UserDetailsImpl userDetails,
             BindingResult bindingResult) {
+
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new IllegalArgumentException("해당하는 게시글을 찾을 수 없습니다.")
         );

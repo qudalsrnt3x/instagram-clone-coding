@@ -5,7 +5,6 @@ import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.domain.User;
 import com.hanghae.instagramclonecoding.posts.comment.Comment;
 import com.hanghae.instagramclonecoding.posts.comment.CommentRepository;
-import com.hanghae.instagramclonecoding.posts.like.Like;
 import com.hanghae.instagramclonecoding.posts.like.LikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,7 +49,7 @@ public class PostService {
     //전체글 조회
     public List<PostResponseDto> getPost() {
 
-        List<Post> posts = postRepository.findAllByPostByCreatedAtDesc();
+        List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
 
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
 

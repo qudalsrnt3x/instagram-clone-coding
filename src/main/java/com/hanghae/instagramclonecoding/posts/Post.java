@@ -33,6 +33,7 @@ public class Post extends Timestamped {
     private User user;
 
     //
+    @Column(columnDefinition = "mediumblob")
     private String imageUrl;
 
     // 댓글
