@@ -2,8 +2,8 @@ package com.hanghae.instagramclonecoding.Security;
 
 
 
-import com.hanghae.instagramclonecoding.domain.User;
-import com.hanghae.instagramclonecoding.repository.UserRepository;
+import com.hanghae.instagramclonecoding.User.User;
+import com.hanghae.instagramclonecoding.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,8 +1,8 @@
 package com.hanghae.instagramclonecoding.Security;
 
 
-import com.hanghae.instagramclonecoding.domain.Role;
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.Role;
+import com.hanghae.instagramclonecoding.User.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

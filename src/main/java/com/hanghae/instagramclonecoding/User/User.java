@@ -1,8 +1,9 @@
-package com.hanghae.instagramclonecoding.domain;
+package com.hanghae.instagramclonecoding.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.ProfileChangeRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.SignupRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.ProfileChangeRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.SignupRequestDto;
+import com.hanghae.instagramclonecoding.domain.Timestamped;
 import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.*;
 

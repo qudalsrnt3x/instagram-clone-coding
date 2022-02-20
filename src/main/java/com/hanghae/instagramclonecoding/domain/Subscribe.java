@@ -1,5 +1,6 @@
 package com.hanghae.instagramclonecoding.domain;
 
+import com.hanghae.instagramclonecoding.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
