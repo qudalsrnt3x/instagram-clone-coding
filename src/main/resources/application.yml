@@ -9,7 +9,7 @@ spring:
   # mysql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/instagram?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://13.125.107.22/instagram?serverTimezone=Asia/Seoul
     username: insta # mysql id
     password: 1234 # mysql pw
 
