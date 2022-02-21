@@ -119,7 +119,10 @@ public class PostService {
                     commentCount,
                     likeCount,
                     post.getCommentList(),
-                    post.getLikeList()
+                    post.getLikeList(),
+                    post.getUser().getProfileImageUrl(),
+                    post.getCreatedAt(),
+                    post.getModifiedAt()
             );
             response.add(postResponseDto);
         }
