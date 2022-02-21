@@ -1,6 +1,10 @@
-package com.hanghae.instagramclonecoding.domain;
+package com.hanghae.instagramclonecoding.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.hanghae.instagramclonecoding.User.RequestDto.ProfileChangeRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.SignupRequestDto;
+import com.hanghae.instagramclonecoding.domain.Timestamped;
+import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.*;
 
 import javax.persistence.*;
@@ -48,4 +52,28 @@ public class User extends Timestamped {
     @JsonIgnoreProperties({"user"})
     private List<Post> posts;
 
+
+    public User(SignupRequestDto requestDto, String hashPassword)
+    {
+        this.email = requestDto.getEmail();
+        this.password = hashPassword;
+        this.nickname = requestDto.getNickname();
+        this.bio = "";
+        this.profileImageUrl = "";
+        this.phone = "";
+        this.website = "";
+        this.gender = "";
+        this.role = Role.USER;
+    }
+
+    public void update(ProfileChangeRequestDto requestDto)
+    {
+//        this.email = requestDto.getEmail();
+
+        this.nickname = requestDto.getNickname();
+        this.profileImageUrl = requestDto.getProfileImageUrl();
+        this.bio = requestDto.getBio();
+        this.website = requestDto.getWebsite();
+        this.phone = requestDto.getPhone();
+    }
 }

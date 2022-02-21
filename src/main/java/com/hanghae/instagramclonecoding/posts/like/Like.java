@@ -1,5 +1,7 @@
-package com.hanghae.instagramclonecoding.domain;
+package com.hanghae.instagramclonecoding.posts.like;
 
+import com.hanghae.instagramclonecoding.User.User;
+import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,14 +14,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "comment")
-public class Comment extends Timestamped{
+@Table(name = "like_table")
+public class Like {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String content;
 
     // 유저
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,4 +30,15 @@ public class Comment extends Timestamped{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Builder
+    public Like(LikeRequestDto requestDto) {
+        this.user = requestDto.getUser();
+        this.post = requestDto.getPost();
+    }
 }
+
+
+
+//            “likeList”: [{
+//              “userId”:”좋아요 한 유저id”
