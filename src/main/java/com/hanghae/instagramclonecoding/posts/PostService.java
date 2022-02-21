@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -65,7 +66,10 @@ public class PostService {
                     commentCount,
                     likeCount,
                     post.getCommentList(),
-                    post.getLikeList()
+                    post.getLikeList(),
+                    post.getUser().getProfileImageUrl(),
+                    post.getCreatedAt(),
+                    post.getModifiedAt()
             );
 
             postResponseDtos.add(postResponseDto);
