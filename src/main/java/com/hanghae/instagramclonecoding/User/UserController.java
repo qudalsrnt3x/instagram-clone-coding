@@ -38,10 +38,10 @@ public class UserController
 
 
     // 마이페이지 - 유저 정보 조회
-    @GetMapping("/user/info/{userId}")
-    public UserInfoResponseDto Userinfo(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long userId)
+    @GetMapping("/user/info")
+    public UserInfoResponseDto Userinfo(@AuthenticationPrincipal UserDetailsImpl userDetails)
     {
-        return userService.Userinfo(userDetails, userId);
+        return userService.Userinfo(userDetails);
     }
 
     // 유저 정보 수정
