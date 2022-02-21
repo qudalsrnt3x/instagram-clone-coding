@@ -30,6 +30,12 @@ public class Like {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Builder
+    public Like(LikeRequestDto requestDto) {
+        this.user = requestDto.getUser();
+        this.post = requestDto.getPost();
+    }
 }
 
 

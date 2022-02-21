@@ -5,11 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class LikeResponseDto {
-    private Long diaryId;
-    private Long totalLike;
+    private Long postId;
+    private Long likeCount;
 
-    public LikeResponseDto(Long diaryId, Long totalLike){
-        this.diaryId = diaryId;
-        this.totalLike = totalLike;
+    public LikeResponseDto(Long postId, Long likeCount){
+        this.postId = postId;
+        this.likeCount = likeCount;
     }
 }

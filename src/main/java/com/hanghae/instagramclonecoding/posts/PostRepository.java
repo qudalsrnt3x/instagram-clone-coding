@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-    List<Post> findAllByPostByCreatedAtDesc();
+
+public interface PostRepository extends JpaRepository<Post, Long> {
+    List<Post> findAllByOrderByCreatedAtDesc();
 
 }

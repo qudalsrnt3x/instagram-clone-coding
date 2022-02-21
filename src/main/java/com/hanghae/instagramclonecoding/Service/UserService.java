@@ -8,7 +8,6 @@ import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.SignupRequestDto;
 import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.LoginResponseDto;
 import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.UserInfoResponseData;
 import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.UserInfoResponseDto;
-import com.hanghae.instagramclonecoding.domain.Post;
 import com.hanghae.instagramclonecoding.domain.Response;
 import com.hanghae.instagramclonecoding.domain.User;
 import com.hanghae.instagramclonecoding.repository.UserRepository;

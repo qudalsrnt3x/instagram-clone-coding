@@ -24,7 +24,7 @@ public class LikeService {
         );
 
         Post post = postRepository.findById(postId).orElseThrow(
-                ()->new IllegalArgumentException("일기가 없습니다.")
+                ()->new IllegalArgumentException("게시글이가 없습니다.")
         );
 
         Like findLike = likeRepository.findByUserAndPost(user,post).orElse(null);
