@@ -1,4 +1,4 @@
-package com.hanghae.instagramclonecoding.domain;
+package com.hanghae.instagramclonecoding.User;
 
 public enum Role {
     USER(Authority.USER), // 사용자 권한

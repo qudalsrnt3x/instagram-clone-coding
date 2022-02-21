@@ -2,7 +2,7 @@ package com.hanghae.instagramclonecoding.posts;
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.domain.Response;
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +50,14 @@ public class PostController {
         response.setResult(true);
         return response;
     }
+
+    // 게시글 조회
+    @GetMapping("/user/mypage/{userId}")
+    public List<PostResponseDto> getMyPost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long userId)
+    {
+        return postService.getMyPost(userDetails,userId);
+    }
+
 }
 
 

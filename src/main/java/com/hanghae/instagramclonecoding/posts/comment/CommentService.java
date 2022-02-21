@@ -2,7 +2,7 @@ package com.hanghae.instagramclonecoding.posts.comment;
 
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import com.hanghae.instagramclonecoding.posts.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Objects;
 
 @Service

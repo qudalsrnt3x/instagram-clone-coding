@@ -1,4 +1,4 @@
-package com.hanghae.instagramclonecoding.domain.Dto.RequestDto;
+package com.hanghae.instagramclonecoding.User.RequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,11 +9,9 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignupRequestDto
+public class LoginRequestDto
 {
     private String email;
-
-    private String nickname;
 
     private String password;
 }

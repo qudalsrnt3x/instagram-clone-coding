@@ -1,7 +1,7 @@
 package com.hanghae.instagramclonecoding.posts.comment;
 
 import com.hanghae.instagramclonecoding.domain.Timestamped;
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

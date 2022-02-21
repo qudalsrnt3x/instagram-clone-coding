@@ -1,16 +1,14 @@
-package com.hanghae.instagramclonecoding.Service;
+package com.hanghae.instagramclonecoding.User;
 
 import com.hanghae.instagramclonecoding.Security.JwtTokenProvider;
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.LoginRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.ProfileChangeRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.SignupRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.LoginResponseDto;
-import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.UserInfoResponseData;
-import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.UserInfoResponseDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.LoginRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.ProfileChangeRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.SignupRequestDto;
+import com.hanghae.instagramclonecoding.User.ResponseDto.LoginResponseDto;
+import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseData;
+import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseDto;
 import com.hanghae.instagramclonecoding.domain.Response;
-import com.hanghae.instagramclonecoding.domain.User;
-import com.hanghae.instagramclonecoding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -125,4 +123,6 @@ public class UserService
         response.setResult(true);
         return response;
     }
+
+
 }
