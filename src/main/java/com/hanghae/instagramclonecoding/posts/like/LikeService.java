@@ -1,10 +1,10 @@
 package com.hanghae.instagramclonecoding.posts.like;
 
 
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import com.hanghae.instagramclonecoding.posts.PostRepository;
-import com.hanghae.instagramclonecoding.repository.UserRepository;
+import com.hanghae.instagramclonecoding.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class LikeService {
         );
 
         Post post = postRepository.findById(postId).orElseThrow(
-                ()->new IllegalArgumentException("일기가 없습니다.")
+                ()->new IllegalArgumentException("게시글이가 없습니다.")
         );
 
         Like findLike = likeRepository.findByUserAndPost(user,post).orElse(null);

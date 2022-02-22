@@ -1,6 +1,6 @@
 package com.hanghae.instagramclonecoding.posts.like;
 
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +30,12 @@ public class Like {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Builder
+    public Like(LikeRequestDto requestDto) {
+        this.user = requestDto.getUser();
+        this.post = requestDto.getPost();
+    }
 }
 
 

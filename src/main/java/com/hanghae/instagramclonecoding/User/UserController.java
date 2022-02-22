@@ -1,12 +1,11 @@
-package com.hanghae.instagramclonecoding.Controller;
+package com.hanghae.instagramclonecoding.User;
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
-import com.hanghae.instagramclonecoding.Service.UserService;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.LoginRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.ProfileChangeRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.LoginResponseDto;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.SignupRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.UserInfoResponseDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.LoginRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.ProfileChangeRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.SignupRequestDto;
+import com.hanghae.instagramclonecoding.User.ResponseDto.LoginResponseDto;
+import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseDto;
 import com.hanghae.instagramclonecoding.domain.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,10 +38,10 @@ public class UserController
 
 
     // 마이페이지 - 유저 정보 조회
-    @GetMapping("/user/info/{userId}")
-    public UserInfoResponseDto Userinfo(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long userId)
+    @GetMapping("/user/info")
+    public UserInfoResponseDto Userinfo(@AuthenticationPrincipal UserDetailsImpl userDetails)
     {
-        return userService.Userinfo(userDetails, userId);
+        return userService.Userinfo(userDetails);
     }
 
     // 유저 정보 수정

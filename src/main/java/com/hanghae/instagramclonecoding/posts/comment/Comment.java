@@ -1,7 +1,7 @@
 package com.hanghae.instagramclonecoding.posts.comment;
 
 import com.hanghae.instagramclonecoding.domain.Timestamped;
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,10 +34,11 @@ public class Comment extends Timestamped {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    public Comment(CommentRequestDto requestDto, Post post, User user){
-        this.content = requestDto.getComment();
+    public Comment(CommentRequestDto requestDto, Post post, User user) {
+        this.content = requestDto.getContent();
         this.post = post;
         this.user = user;
+    }
 }
 
 

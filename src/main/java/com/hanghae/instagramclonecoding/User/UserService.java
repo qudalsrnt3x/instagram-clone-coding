@@ -1,17 +1,14 @@
-package com.hanghae.instagramclonecoding.Service;
+package com.hanghae.instagramclonecoding.User;
 
 import com.hanghae.instagramclonecoding.Security.JwtTokenProvider;
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.LoginRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.ProfileChangeRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.SignupRequestDto;
-import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.LoginResponseDto;
-import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.UserInfoResponseData;
-import com.hanghae.instagramclonecoding.domain.Dto.ResponseDto.UserInfoResponseDto;
-import com.hanghae.instagramclonecoding.domain.Post;
+import com.hanghae.instagramclonecoding.User.RequestDto.LoginRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.ProfileChangeRequestDto;
+import com.hanghae.instagramclonecoding.User.RequestDto.SignupRequestDto;
+import com.hanghae.instagramclonecoding.User.ResponseDto.LoginResponseDto;
+import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseData;
+import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseDto;
 import com.hanghae.instagramclonecoding.domain.Response;
-import com.hanghae.instagramclonecoding.domain.User;
-import com.hanghae.instagramclonecoding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -77,16 +74,20 @@ public class UserService
     }
 
     // 마이 페이지 - 내 정보
-    public UserInfoResponseDto Userinfo(UserDetailsImpl userDetails, Long userId)
+    public UserInfoResponseDto Userinfo(UserDetailsImpl userDetails)
     {
-        // 전달받은 userId 값과 토큰에 저장된 유저 정보의 id 값이 다르다면 예외 처리
-        if (!userDetails.getUser().getId().equals(userId))
-        {
-            throw new IllegalArgumentException("잘못된 접근입니다. ( 토큰과 다른 아이디)");
-        }
 
-        User user = userRepository.findById(userId).orElseThrow(
-                ()-> new IllegalArgumentException("해당 유저 없음") );
+        User user = userDetails.getUser();
+
+        // api 변경으로 인해 주석처리
+//        // 전달받은 userId 값과 토큰에 저장된 유저 정보의 id 값이 다르다면 예외 처리
+//        if (!userDetails.getUser().getId().equals(userId))
+//        {
+//            throw new IllegalArgumentException("잘못된 접근입니다. ( 토큰과 다른 아이디)");
+//        }
+//
+//        User user = userRepository.findById(userId).orElseThrow(
+//                ()-> new IllegalArgumentException("해당 유저 없음") );
 
         // response 객체 생성 및 응답
         UserInfoResponseData userInfoResponseData = new UserInfoResponseData(user);
@@ -126,4 +127,6 @@ public class UserService
         response.setResult(true);
         return response;
     }
+
+
 }

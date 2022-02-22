@@ -1,6 +1,5 @@
-package com.hanghae.instagramclonecoding.repository;
+package com.hanghae.instagramclonecoding.User;
 
-import com.hanghae.instagramclonecoding.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

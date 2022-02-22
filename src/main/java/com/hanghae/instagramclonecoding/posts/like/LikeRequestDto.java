@@ -1,7 +1,6 @@
 package com.hanghae.instagramclonecoding.posts.like;
 
-import com.example.todaydiary.diary.Diary;
-import com.example.todaydiary.user.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

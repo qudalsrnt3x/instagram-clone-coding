@@ -2,7 +2,7 @@ package com.hanghae.instagramclonecoding.posts;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hanghae.instagramclonecoding.domain.Timestamped;
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.comment.Comment;
 import com.hanghae.instagramclonecoding.posts.like.Like;
 import lombok.AllArgsConstructor;
@@ -33,6 +33,7 @@ public class Post extends Timestamped {
     private User user;
 
     //
+    @Column(columnDefinition = "mediumblob")
     private String imageUrl;
 
     // 댓글
