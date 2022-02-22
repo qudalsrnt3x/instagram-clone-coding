@@ -25,7 +25,7 @@ public class PostController {
     // 게시글 작성
     @PostMapping("/api/post")
     public Response createMeeting(@RequestPart(value = "content") String content,
-                                  @RequestPart(value = "imageUrl") MultipartFile multipartFile,
+                                  @RequestPart(value = "imageUrl", required = false) MultipartFile multipartFile,
                                   @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
     {
 
