@@ -126,4 +126,57 @@ public class PostService {
         postRepository.deleteById(postId);
         return postId;
     }
+
+    @ResponseBody
+    public List<PostResponseDto> getMyPost(UserDetailsImpl userDetails, Long userId)
+    {
+        List<Post> postList = postRepository.findAllByUserOrderByCreatedAtDesc(userDetails.getUser());
+        List<PostResponseDto> response = new ArrayList<>();
+
+        for (Post post : postList)
+        {
+            List<CommentUserDto> commentUserDtos = new ArrayList<>();
+            List<LikeUserDto> likeUserDtos = new ArrayList<>();
+
+            Long commentCount = commentRepository.countByPost(post);
+            Long likeCount = likeRepository.countByPost(post);
+
+            List<Like> likes = likeRepository.findAllByPost(post);
+            List<Comment> comments = commentRepository.findAllByPost(post);
+
+            for (Like like : likes)
+            {
+                LikeUserDto likeUserDto = new LikeUserDto(like);
+                likeUserDtos.add(likeUserDto);
+            }
+
+            for (Comment comment : comments) {
+                CommentUserDto commentUserDto = new CommentUserDto(comment);
+                commentUserDtos.add(commentUserDto);
+            }
+
+
+            PostResponseDto postResponseDto = new PostResponseDto(
+                    post.getId(),
+                    post.getUser().getId(),
+                    post.getUser().getNickname(),
+                    post.getContent(),
+                    post.getImageUrl(),
+                    commentCount,
+                    likeCount,
+                    commentUserDtos,
+                    likeUserDtos,
+                    post.getUser().getProfileImageUrl(),
+                    post.getCreatedAt(),
+                    post.getModifiedAt()
+            );
+
+
+            response.add(postResponseDto);
+
+        }
+        return response;
+
+
+    }
 }
