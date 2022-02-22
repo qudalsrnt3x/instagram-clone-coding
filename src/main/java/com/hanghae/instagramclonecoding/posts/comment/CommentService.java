@@ -1,6 +1,7 @@
 package com.hanghae.instagramclonecoding.posts.comment;
 
 
+import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.domain.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import com.hanghae.instagramclonecoding.posts.PostRepository;
@@ -27,6 +28,7 @@ public class CommentService {
             CommentRequestDto requestDto,
             UserDetailsImpl userDetails,
             BindingResult bindingResult) {
+
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new IllegalArgumentException("해당하는 게시글을 찾을 수 없습니다.")
         );

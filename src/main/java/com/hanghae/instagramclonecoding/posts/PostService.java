@@ -1,6 +1,7 @@
 package com.hanghae.instagramclonecoding.posts;
 
 
+import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.domain.User;
 import com.hanghae.instagramclonecoding.posts.comment.Comment;
 import com.hanghae.instagramclonecoding.posts.comment.CommentRepository;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -49,13 +51,16 @@ public class PostService {
     //전체글 조회
     public List<PostResponseDto> getPost() {
 
-        List<Post> posts = postRepository.findAllByPostByCreatedAtDesc();
+        List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
+
 
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
 
         for (Post post : posts) {
             Long commentCount = commentRepository.countByPost(post);
             Long likeCount = likeRepository.countByPost(post);
+            List<Like> likes = likeRepository.findAllByPostId( post.getId());
+            List<Comment> comments = commentRepository.findAllByPostId( post.getId());
             PostResponseDto postResponseDto = new PostResponseDto(
                     post.getId(),
                     post.getUser().getId(),
@@ -64,8 +69,11 @@ public class PostService {
                     post.getImageUrl(),
                     commentCount,
                     likeCount,
-                    post.getCommentList(),
-                    post.getLikeList()
+                    comments,
+                    likes,
+                    post.getUser().getProfileImageUrl(),
+                    post.getCreatedAt(),
+                    post.getModifiedAt()
             );
 
             postResponseDtos.add(postResponseDto);

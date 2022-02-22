@@ -1,6 +1,8 @@
 package com.hanghae.instagramclonecoding.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.ProfileChangeRequestDto;
+import com.hanghae.instagramclonecoding.domain.Dto.RequestDto.SignupRequestDto;
 import com.hanghae.instagramclonecoding.posts.Post;
 import lombok.*;
 
@@ -14,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
-public class User<Post> extends Timestamped {
+public class User extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,4 +51,28 @@ public class User<Post> extends Timestamped {
     @JsonIgnoreProperties({"user"})
     private List<Post> posts;
 
+
+    public User(SignupRequestDto requestDto, String hashPassword)
+    {
+        this.email = requestDto.getEmail();
+        this.password = hashPassword;
+        this.nickname = requestDto.getNickname();
+        this.bio = "";
+        this.profileImageUrl = "";
+        this.phone = "";
+        this.website = "";
+        this.gender = "";
+        this.role = Role.USER;
+    }
+
+    public void update(ProfileChangeRequestDto requestDto)
+    {
+//        this.email = requestDto.getEmail();
+
+        this.nickname = requestDto.getNickname();
+        this.profileImageUrl = requestDto.getProfileImageUrl();
+        this.bio = requestDto.getBio();
+        this.website = requestDto.getWebsite();
+        this.phone = requestDto.getPhone();
+    }
 }
