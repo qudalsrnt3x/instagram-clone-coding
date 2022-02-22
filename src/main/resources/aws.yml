@@ -1,0 +1,15 @@
+cloud:
+  aws:
+    credentials:
+      # IAM 사용자 엑세스 키
+      accessKey: AKIAZBSHOCITSRMH7T6E
+      # IAM 사용자 비밀 엑세스
+      secretKey: z2HJukc8rHFX1sXZTRwNftzOwswnWfKW5ak33umG
+
+    s3:
+      # 버킷 이름
+      bucket: instacloncoding
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
