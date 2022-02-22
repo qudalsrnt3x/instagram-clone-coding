@@ -24,12 +24,20 @@ public class PostController {
 
     // 게시글 작성
     @PostMapping("/api/post")
-    public Response createPost(
-            @RequestBody PostRequestDto postRequestDto,
-            @AuthenticationPrincipal UserDetailsImpl userDetails
-    ) {
+    public Response createMeeting(@RequestPart(value = "content") @Valid String Contect,
+                                  @RequestPart(value = "imageURL") MultipartFile multipartFile,
+                                  @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
+    {
+
+        String Url = s3Uploader.upload(multipartFile, "static");
         User user = userDetails.getUser();
-        postService.createPost(postRequestDto, user);
+
+        PostRequestDto dto = new PostRequestDto();
+
+        dto.setImageUrl(Url);
+        dto.setContent(Contect);
+
+        postService.createPost(dto, user);
 
         Response response = new Response();
         response.setResult(true);
@@ -53,34 +61,4 @@ public class PostController {
         response.setResult(true);
         return response;
     }
-
-
-    @PostMapping("/images")
-    public String upload(@RequestParam("images") MultipartFile multipartFile) throws IOException {
-        s3Uploader.upload(multipartFile, "static");
-        return "test";
-    }
-
-    @PostMapping("/api/post2")
-    public Response createMeeting(@RequestPart(value = "content") @Valid String Contect,
-                                  @RequestPart(value = "imageURL") MultipartFile multipartFile,
-                                  @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
-    {
-
-        String Url = s3Uploader.upload(multipartFile, "static");
-        User user = userDetails.getUser();
-
-        PostRequestDto dto = new PostRequestDto();
-
-        dto.setImageUrl(Url);
-        dto.setContent(Contect);
-
-        postService.createPost(dto, user);
-
-        Response response = new Response();
-        response.setResult(true);
-        return response;
-
-    }
-
 }
