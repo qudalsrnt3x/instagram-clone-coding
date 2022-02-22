@@ -61,14 +61,8 @@ public class User extends Timestamped {
         this.role = Role.USER;
     }
 
-    public void update(ProfileChangeRequestDto requestDto)
-    {
-//        this.email = requestDto.getEmail();
+    public User(ProfileChangeRequestDto profileChangeRequestDto, User user) {
+        this.profileImageUrl = profileChangeRequestDto.getProfileImageUrl();
 
-        this.nickname = requestDto.getNickname();
-        this.profileImageUrl = requestDto.getProfileImageUrl();
-        this.bio = requestDto.getBio();
-        this.website = requestDto.getWebsite();
-        this.phone = requestDto.getPhone();
     }
 }
