@@ -24,7 +24,7 @@ public class PostController {
 
     // 게시글 작성
     @PostMapping("/api/post")
-    public Response createMeeting(@RequestPart(value = "data") PostRequestDto requestDto,
+    public Response createMeeting(@RequestPart(value = "content") String content,
                                   @RequestPart(value = "imageUrl") MultipartFile multipartFile,
                                   @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
     {
@@ -34,7 +34,8 @@ public class PostController {
 
         PostRequestDto dto = new PostRequestDto();
 
-        requestDto.setImageUrl(Url);
+        dto.setImageUrl(Url);
+        dto.setContent(content);
 
         postService.createPost(dto, user);
 
