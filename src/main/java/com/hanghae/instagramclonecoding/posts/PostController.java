@@ -60,4 +60,11 @@ public class PostController {
         response.setResult(true);
         return response;
     }
+
+    // 게시글 조회
+    @GetMapping("/user/mypage/{userId}")
+    public List<PostResponseDto> getMyPost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long userId)
+    {
+        return postService.getMyPost(userDetails,userId);
+    }
 }
