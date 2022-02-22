@@ -2,8 +2,12 @@ package com.hanghae.instagramclonecoding.posts;
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.domain.Response;
+<<<<<<< HEAD
 import com.hanghae.instagramclonecoding.domain.User;
 import com.hanghae.instagramclonecoding.image.S3Uploader;
+=======
+import com.hanghae.instagramclonecoding.User.User;
+>>>>>>> origin/deploy
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -54,12 +58,22 @@ public class PostController {
         return response;
     }
 
+<<<<<<< HEAD
 
     @PostMapping("/images")
     public String upload(@RequestParam("images") MultipartFile multipartFile) throws IOException {
         s3Uploader.upload(multipartFile, "static");
         return "test";
     }
+=======
+    // 게시글 조회
+    @GetMapping("/user/mypage/{userId}")
+    public List<PostResponseDto> getMyPost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long userId)
+    {
+        return postService.getMyPost(userDetails,userId);
+    }
+
+>>>>>>> origin/deploy
 }
 
 
