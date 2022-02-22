@@ -5,11 +5,14 @@ import com.hanghae.instagramclonecoding.User.RequestDto.LoginRequestDto;
 import com.hanghae.instagramclonecoding.User.RequestDto.ProfileChangeRequestDto;
 import com.hanghae.instagramclonecoding.User.RequestDto.SignupRequestDto;
 import com.hanghae.instagramclonecoding.User.ResponseDto.LoginResponseDto;
+import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseData;
 import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseDto;
 import com.hanghae.instagramclonecoding.domain.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserController
@@ -51,5 +54,9 @@ public class UserController
         return userService.updateUserinfo(requestDto,userDetails, userId);
     }
 
-
+    // 전체 유저 조회
+    @GetMapping("/users")
+    public List<UserInfoResponseData> getUsers() {
+        return userService.getUsers();
+    }
 }

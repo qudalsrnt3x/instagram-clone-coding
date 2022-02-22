@@ -20,6 +20,5 @@ public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureMessageBroker(MessageBrokerRegistry registry) {
             registry.setApplicationDestinationPrefixes("/chat");
             registry.enableSimpleBroker("/chatroom", "/user"); // 체팅방, 유저
-            registry.setUserDestinationPrefix("/user");
     }
 }
