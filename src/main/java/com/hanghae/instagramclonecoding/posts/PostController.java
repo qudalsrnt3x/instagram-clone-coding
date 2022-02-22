@@ -37,7 +37,8 @@ public class PostController {
 
     // 게시글 전체조회
     @GetMapping("/api/post")
-    public List<PostResponseDto> getPost() {
+    public List<PostResponseDto> getPost()
+    {
         return postService.getPost();
     }
 

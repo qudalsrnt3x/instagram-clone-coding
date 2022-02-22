@@ -49,18 +49,22 @@ public class PostService {
 
 
     //전체글 조회
-    public List<PostResponseDto> getPost() {
+    public List<PostResponseDto> getPost()
+    {
 
         List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
 
 
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
 
-        for (Post post : posts) {
+        for (Post post : posts)
+        {
             Long commentCount = commentRepository.countByPost(post);
             Long likeCount = likeRepository.countByPost(post);
-            List<Like> likes = likeRepository.findAllByPostId( post.getId());
-            List<Comment> comments = commentRepository.findAllByPostId( post.getId());
+            List<Like> likes = likeRepository.findAllByPost( post);
+            List<Comment> comments = commentRepository.findAllByPost(post);
+
+
             PostResponseDto postResponseDto = new PostResponseDto(
                     post.getId(),
                     post.getUser().getId(),
@@ -94,7 +98,7 @@ public class PostService {
         if (!Objects.equals(userDetails.getUser().getId(), deleteId)) {
             throw new IllegalArgumentException("작성자만 수정할 수 있습니다.");
         }
-        List<Comment> comments = commentRepository.findAllByPostId(postId);
+        List<Comment> comments = commentRepository.findAllByPost(post);
         for (Comment comment : comments) {
             commentRepository.deleteById(comment.getId());
         }
