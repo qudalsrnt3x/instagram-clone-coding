@@ -1,8 +1,8 @@
 package com.hanghae.instagramclonecoding.posts.comment;
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
-import com.hanghae.instagramclonecoding.domain.Response;
 import lombok.RequiredArgsConstructor;
+import com.hanghae.instagramclonecoding.domain.Response;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
