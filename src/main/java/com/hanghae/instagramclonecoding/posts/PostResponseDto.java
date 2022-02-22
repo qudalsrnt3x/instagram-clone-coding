@@ -20,9 +20,9 @@ public class PostResponseDto {
     private final String imageUrl;
     private Long commentCount;
     private Long likeCount;
+    private final List<Comment> comments;
+    private final List<Like> likes;
 
-    private final List<Comment> commentList;
-    private final List<Like> likeList;
     private final String user_profile;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
@@ -39,8 +39,8 @@ public class PostResponseDto {
         this.imageUrl = imageUrl;
         this.commentCount = commentCount;
         this.likeCount = likeCount;
-        this.commentList = commentList;
-        this.likeList = likeList;
+        this.comments = commentList;
+        this.likes = likeList;
         this.user_profile = user_profile;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
