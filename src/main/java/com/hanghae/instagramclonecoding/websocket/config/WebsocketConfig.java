@@ -12,13 +12,13 @@ public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*")
+        registry.addEndpoint("/ws-stomp").setAllowedOriginPatterns("*")
                 .withSockJS(); // 소켓의 접두사는 /ws 로 시작, 모든 출처의 리소스를 허용
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-            registry.setApplicationDestinationPrefixes("/app");
+            registry.setApplicationDestinationPrefixes("/chat");
             registry.enableSimpleBroker("/chatroom", "/user"); // 체팅방, 유저
             registry.setUserDestinationPrefix("/user");
     }
