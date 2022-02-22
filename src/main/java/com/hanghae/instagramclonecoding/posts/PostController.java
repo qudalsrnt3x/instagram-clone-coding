@@ -24,7 +24,7 @@ public class PostController {
 
     // 게시글 작성
     @PostMapping("/api/post")
-    public Response createMeeting(@RequestPart(value = "content") @Valid String Contect,
+    public Response createMeeting(@RequestPart(value = "content") @Valid PostRequestDto requestDto,
                                   @RequestPart(value = "imageURL") MultipartFile multipartFile,
                                   @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
     {
@@ -32,12 +32,9 @@ public class PostController {
         String Url = s3Uploader.upload(multipartFile, "static");
         User user = userDetails.getUser();
 
-        PostRequestDto dto = new PostRequestDto();
+        requestDto.setImageUrl(Url);
 
-        dto.setImageUrl(Url);
-        dto.setContent(Contect);
-
-        postService.createPost(dto, user);
+        postService.createPost(requestDto, user);
 
         Response response = new Response();
         response.setResult(true);
