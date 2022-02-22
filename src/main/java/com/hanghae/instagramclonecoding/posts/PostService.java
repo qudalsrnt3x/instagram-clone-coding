@@ -5,13 +5,14 @@ import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.domain.User;
 import com.hanghae.instagramclonecoding.posts.comment.Comment;
 import com.hanghae.instagramclonecoding.posts.comment.CommentRepository;
+import com.hanghae.instagramclonecoding.posts.comment.CommentUserDto;
 import com.hanghae.instagramclonecoding.posts.like.Like;
 import com.hanghae.instagramclonecoding.posts.like.LikeRepository;
+import com.hanghae.instagramclonecoding.posts.like.LikeUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,22 +48,31 @@ public class PostService {
     }
 
 
-
     //전체글 조회
-    public List<PostResponseDto> getPost()
-    {
+    public List<PostResponseDto> getPost() {
 
         List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
 
 
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
+        List<LikeUserDto> likeUserDtos = new ArrayList<>();
+        List<CommentUserDto> commentUserDtos = new ArrayList<>();
 
-        for (Post post : posts)
-        {
+        for (Post post : posts) {
             Long commentCount = commentRepository.countByPost(post);
             Long likeCount = likeRepository.countByPost(post);
-            List<Like> likes = likeRepository.findAllByPost( post);
+            List<Like> likes = likeRepository.findAllByPost(post);
             List<Comment> comments = commentRepository.findAllByPost(post);
+
+            for (Like like : likes) {
+                LikeUserDto likeUserDto = new LikeUserDto(like);
+                likeUserDtos.add(likeUserDto);
+            }
+
+            for (Comment comment : comments) {
+                CommentUserDto commentUserDto = new CommentUserDto(comment);
+                commentUserDtos.add(commentUserDto);
+            }
 
 
             PostResponseDto postResponseDto = new PostResponseDto(
@@ -73,12 +83,13 @@ public class PostService {
                     post.getImageUrl(),
                     commentCount,
                     likeCount,
-                    comments,
-                    likes,
+                    commentUserDtos,
+                    likeUserDtos,
                     post.getUser().getProfileImageUrl(),
                     post.getCreatedAt(),
                     post.getModifiedAt()
             );
+
 
             postResponseDtos.add(postResponseDto);
 
