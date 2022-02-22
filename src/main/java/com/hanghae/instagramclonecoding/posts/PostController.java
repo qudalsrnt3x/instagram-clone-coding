@@ -1,6 +1,9 @@
 package com.hanghae.instagramclonecoding.posts;
 
+import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
+import com.hanghae.instagramclonecoding.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
