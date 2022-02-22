@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -59,4 +60,27 @@ public class PostController {
         s3Uploader.upload(multipartFile, "static");
         return "test";
     }
+
+    @PostMapping("/api/post2")
+    public Response createMeeting(@RequestPart(value = "content") @Valid String Contect,
+                                  @RequestPart(value = "imageURL") MultipartFile multipartFile,
+                                  @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
+    {
+
+        String Url = s3Uploader.upload(multipartFile, "static");
+        User user = userDetails.getUser();
+
+        PostRequestDto dto = new PostRequestDto();
+
+        dto.setImageUrl(Url);
+        dto.setContent(Contect);
+
+        postService.createPost(dto, user);
+
+        Response response = new Response();
+        response.setResult(true);
+        return response;
+
+    }
+
 }
