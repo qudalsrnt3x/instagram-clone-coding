@@ -56,16 +56,24 @@ public class PostService {
 
 
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
-        List<LikeUserDto> likeUserDtos = new ArrayList<>();
-        List<CommentUserDto> commentUserDtos = new ArrayList<>();
+//        List<LikeUserDto> likeUserDtos = new ArrayList<>();
+//        List<CommentUserDto> commentUserDtos = new ArrayList<>();
 
-        for (Post post : posts) {
+        for (Post post : posts)
+        {
+
+            List<CommentUserDto> commentUserDtos = new ArrayList<>();
+            List<LikeUserDto> likeUserDtos = new ArrayList<>();
+
             Long commentCount = commentRepository.countByPost(post);
             Long likeCount = likeRepository.countByPost(post);
+
             List<Like> likes = likeRepository.findAllByPost(post);
             List<Comment> comments = commentRepository.findAllByPost(post);
 
-            for (Like like : likes) {
+
+            for (Like like : likes)
+            {
                 LikeUserDto likeUserDto = new LikeUserDto(like);
                 likeUserDtos.add(likeUserDto);
             }
