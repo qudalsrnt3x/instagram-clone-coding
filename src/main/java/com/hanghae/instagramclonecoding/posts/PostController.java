@@ -29,6 +29,7 @@ public class PostController {
                                   @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
     {
 
+
         String Url = s3Uploader.upload(multipartFile, "static");
         User user = userDetails.getUser();
 
