@@ -5,13 +5,15 @@ import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.comment.Comment;
 import com.hanghae.instagramclonecoding.posts.comment.CommentRepository;
+import com.hanghae.instagramclonecoding.posts.comment.CommentUserDto;
+import com.hanghae.instagramclonecoding.posts.like.Like;
 import com.hanghae.instagramclonecoding.posts.like.LikeRepository;
+import com.hanghae.instagramclonecoding.posts.like.LikeUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,17 +49,33 @@ public class PostService {
     }
 
 
-
     //전체글 조회
     public List<PostResponseDto> getPost() {
 
         List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
 
+
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
+        List<LikeUserDto> likeUserDtos = new ArrayList<>();
+        List<CommentUserDto> commentUserDtos = new ArrayList<>();
 
         for (Post post : posts) {
             Long commentCount = commentRepository.countByPost(post);
             Long likeCount = likeRepository.countByPost(post);
+            List<Like> likes = likeRepository.findAllByPost(post);
+            List<Comment> comments = commentRepository.findAllByPost(post);
+
+            for (Like like : likes) {
+                LikeUserDto likeUserDto = new LikeUserDto(like);
+                likeUserDtos.add(likeUserDto);
+            }
+
+            for (Comment comment : comments) {
+                CommentUserDto commentUserDto = new CommentUserDto(comment);
+                commentUserDtos.add(commentUserDto);
+            }
+
+
             PostResponseDto postResponseDto = new PostResponseDto(
                     post.getId(),
                     post.getUser().getId(),
@@ -66,12 +84,13 @@ public class PostService {
                     post.getImageUrl(),
                     commentCount,
                     likeCount,
-                    post.getCommentList(),
-                    post.getLikeList(),
+                    commentUserDtos,
+                    likeUserDtos,
                     post.getUser().getProfileImageUrl(),
                     post.getCreatedAt(),
                     post.getModifiedAt()
             );
+
 
             postResponseDtos.add(postResponseDto);
 
@@ -91,7 +110,7 @@ public class PostService {
         if (!Objects.equals(userDetails.getUser().getId(), deleteId)) {
             throw new IllegalArgumentException("작성자만 수정할 수 있습니다.");
         }
-        List<Comment> comments = commentRepository.findAllByPostId(postId);
+        List<Comment> comments = commentRepository.findAllByPost(post);
         for (Comment comment : comments) {
             commentRepository.deleteById(comment.getId());
         }
@@ -99,40 +118,4 @@ public class PostService {
         postRepository.deleteById(postId);
         return postId;
     }
-
-
-    @ResponseBody
-    public List<PostResponseDto> getMyPost(UserDetailsImpl userDetails, Long userId)
-    {
-        List<Post> postList = postRepository.findAllByUser(userDetails.getUser());
-        List<PostResponseDto> response = new ArrayList<>();
-        for (Post post : postList)
-        {
-            Long commentCount = commentRepository.countByPost(post);
-            Long likeCount = likeRepository.countByPost(post);
-            PostResponseDto postResponseDto = new PostResponseDto(
-                    post.getId(),
-                    post.getUser().getId(),
-                    post.getUser().getNickname(),
-                    post.getContent(),
-                    post.getImageUrl(),
-                    commentCount,
-                    likeCount,
-                    post.getCommentList(),
-                    post.getLikeList(),
-                    post.getUser().getProfileImageUrl(),
-                    post.getCreatedAt(),
-                    post.getModifiedAt()
-            );
-            response.add(postResponseDto);
-        }
-        return response;
-
-
-    }
-
-
-
-
-
 }

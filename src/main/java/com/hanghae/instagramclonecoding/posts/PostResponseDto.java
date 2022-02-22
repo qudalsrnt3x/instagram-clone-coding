@@ -2,7 +2,9 @@ package com.hanghae.instagramclonecoding.posts;
 
 
 import com.hanghae.instagramclonecoding.posts.comment.Comment;
+import com.hanghae.instagramclonecoding.posts.comment.CommentUserDto;
 import com.hanghae.instagramclonecoding.posts.like.Like;
+import com.hanghae.instagramclonecoding.posts.like.LikeUserDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,9 +22,9 @@ public class PostResponseDto {
     private final String imageUrl;
     private Long commentCount;
     private Long likeCount;
+    private List<CommentUserDto> commentUserDto;
+    private List<LikeUserDto> likeUserDto;
 
-    private final List<Comment> commentList;
-    private final List<Like> likeList;
     private final String user_profile;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
@@ -30,7 +32,7 @@ public class PostResponseDto {
 
 
     public PostResponseDto(Long id, Long uid, String nickname, String content, String imageUrl , Long commentCount, Long likeCount,
-                           List<Comment> commentList, List<Like> likeList, String user_profile, LocalDateTime createdAt, LocalDateTime modifiedAt
+                           List<CommentUserDto> commentUserDto, List<LikeUserDto> likeUserDto, String user_profile, LocalDateTime createdAt, LocalDateTime modifiedAt
 ) {
         this.id = id;
         this.uid = uid;
@@ -39,8 +41,8 @@ public class PostResponseDto {
         this.imageUrl = imageUrl;
         this.commentCount = commentCount;
         this.likeCount = likeCount;
-        this.commentList = commentList;
-        this.likeList = likeList;
+        this.commentUserDto = commentUserDto;
+        this.likeUserDto = likeUserDto;
         this.user_profile = user_profile;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;

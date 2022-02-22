@@ -2,11 +2,18 @@ package com.hanghae.instagramclonecoding.posts;
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.domain.Response;
+<<<<<<< HEAD
+import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.image.S3Uploader;
+=======
 import com.hanghae.instagramclonecoding.User.User;
+>>>>>>> origin/deploy
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -14,9 +21,8 @@ import java.util.List;
 @RestController
 public class PostController {
 
-
+    private final S3Uploader s3Uploader;
     private final PostService postService;
-
 
 
     // 게시글 작성
@@ -33,9 +39,10 @@ public class PostController {
         return response;
     }
 
-    // 게시글 조회
+    // 게시글 전체조회
     @GetMapping("/api/post")
-    public List<PostResponseDto> getPost() {
+    public List<PostResponseDto> getPost()
+    {
         return postService.getPost();
     }
 
@@ -51,6 +58,14 @@ public class PostController {
         return response;
     }
 
+<<<<<<< HEAD
+
+    @PostMapping("/images")
+    public String upload(@RequestParam("images") MultipartFile multipartFile) throws IOException {
+        s3Uploader.upload(multipartFile, "static");
+        return "test";
+    }
+=======
     // 게시글 조회
     @GetMapping("/user/mypage/{userId}")
     public List<PostResponseDto> getMyPost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long userId)
@@ -58,7 +73,9 @@ public class PostController {
         return postService.getMyPost(userDetails,userId);
     }
 
+>>>>>>> origin/deploy
 }
+
 
 
 

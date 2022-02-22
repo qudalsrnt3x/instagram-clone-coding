@@ -53,6 +53,9 @@ dependencies {
 
     //유효성 검사를 위한 validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    //S3 의존성 설치.
+    compileOnly 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
 }
 
 tasks.named('test') {
