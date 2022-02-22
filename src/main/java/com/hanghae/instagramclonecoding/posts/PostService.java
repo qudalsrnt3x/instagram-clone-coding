@@ -118,40 +118,4 @@ public class PostService {
         postRepository.deleteById(postId);
         return postId;
     }
-
-
-    @ResponseBody
-    public List<PostResponseDto> getMyPost(UserDetailsImpl userDetails, Long userId)
-    {
-        List<Post> postList = postRepository.findAllByUser(userDetails.getUser());
-        List<PostResponseDto> response = new ArrayList<>();
-        for (Post post : postList)
-        {
-            Long commentCount = commentRepository.countByPost(post);
-            Long likeCount = likeRepository.countByPost(post);
-            PostResponseDto postResponseDto = new PostResponseDto(
-                    post.getId(),
-                    post.getUser().getId(),
-                    post.getUser().getNickname(),
-                    post.getContent(),
-                    post.getImageUrl(),
-                    commentCount,
-                    likeCount,
-                    post.getCommentList(),
-                    post.getLikeList(),
-                    post.getUser().getProfileImageUrl(),
-                    post.getCreatedAt(),
-                    post.getModifiedAt()
-            );
-            response.add(postResponseDto);
-        }
-        return response;
-
-
-    }
-
-
-
-
-
 }
