@@ -2,7 +2,7 @@ package com.hanghae.instagramclonecoding.posts;
 
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.comment.Comment;
 import com.hanghae.instagramclonecoding.posts.comment.CommentRepository;
 import com.hanghae.instagramclonecoding.posts.comment.CommentUserDto;
@@ -11,6 +11,7 @@ import com.hanghae.instagramclonecoding.posts.like.LikeRepository;
 import com.hanghae.instagramclonecoding.posts.like.LikeUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -117,6 +118,40 @@ public class PostService {
         postRepository.deleteById(postId);
         return postId;
     }
+
+
+    @ResponseBody
+    public List<PostResponseDto> getMyPost(UserDetailsImpl userDetails, Long userId)
+    {
+        List<Post> postList = postRepository.findAllByUser(userDetails.getUser());
+        List<PostResponseDto> response = new ArrayList<>();
+        for (Post post : postList)
+        {
+            Long commentCount = commentRepository.countByPost(post);
+            Long likeCount = likeRepository.countByPost(post);
+            PostResponseDto postResponseDto = new PostResponseDto(
+                    post.getId(),
+                    post.getUser().getId(),
+                    post.getUser().getNickname(),
+                    post.getContent(),
+                    post.getImageUrl(),
+                    commentCount,
+                    likeCount,
+                    post.getCommentList(),
+                    post.getLikeList(),
+                    post.getUser().getProfileImageUrl(),
+                    post.getCreatedAt(),
+                    post.getModifiedAt()
+            );
+            response.add(postResponseDto);
+        }
+        return response;
+
+
+    }
+
+
+
 
 
 }

@@ -1,10 +1,10 @@
 package com.hanghae.instagramclonecoding.posts.like;
 
 
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import com.hanghae.instagramclonecoding.posts.PostRepository;
-import com.hanghae.instagramclonecoding.repository.UserRepository;
+import com.hanghae.instagramclonecoding.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

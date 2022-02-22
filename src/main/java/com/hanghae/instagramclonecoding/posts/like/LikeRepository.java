@@ -1,6 +1,6 @@
 package com.hanghae.instagramclonecoding.posts.like;
 
-import com.hanghae.instagramclonecoding.domain.User;
+import com.hanghae.instagramclonecoding.User.User;
 import com.hanghae.instagramclonecoding.posts.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
