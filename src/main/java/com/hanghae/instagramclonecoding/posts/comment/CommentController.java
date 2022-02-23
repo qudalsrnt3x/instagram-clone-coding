@@ -1,12 +1,15 @@
 package com.hanghae.instagramclonecoding.posts.comment;
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
+import com.hanghae.instagramclonecoding.posts.PostResponseDto;
 import lombok.RequiredArgsConstructor;
 import com.hanghae.instagramclonecoding.domain.Response;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -41,5 +44,12 @@ public class CommentController {
         Response response = new Response();
         response.setResult(true);
         return response;
+    }
+
+    //댓글 조회
+    @GetMapping("/api/comment/{postId}")
+    public List<CommentResponseDto> getComment(@PathVariable Long postId)
+    {
+        return commentService.getComment(postId);
     }
 }
