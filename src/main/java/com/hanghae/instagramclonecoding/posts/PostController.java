@@ -9,7 +9,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class PostController {
 
     // 게시글 작성
     @PostMapping("/api/post")
+
     public Response createMeeting(@RequestPart(value = "content") String content,
                                   @RequestPart(value = "imageUrl", required = false) MultipartFile multipartFile,
                                   @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
