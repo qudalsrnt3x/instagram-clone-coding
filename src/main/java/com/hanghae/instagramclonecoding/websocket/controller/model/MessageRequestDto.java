@@ -7,11 +7,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Message {
+public class MessageRequestDto {
 
-    private String senderName;
-    private String receiverName;
     private String message;
-    private String data;
     private Status status;
+    private Long userId;
+    private String sender;
+    private String createdAt;
 }

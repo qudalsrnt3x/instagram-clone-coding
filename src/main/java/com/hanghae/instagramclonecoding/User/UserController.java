@@ -5,6 +5,7 @@ import com.hanghae.instagramclonecoding.User.RequestDto.LoginRequestDto;
 import com.hanghae.instagramclonecoding.User.RequestDto.ProfileChangeRequestDto;
 import com.hanghae.instagramclonecoding.User.RequestDto.SignupRequestDto;
 import com.hanghae.instagramclonecoding.User.ResponseDto.LoginResponseDto;
+import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseData;
 import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseDto;
 import com.hanghae.instagramclonecoding.domain.Response;
 import com.hanghae.instagramclonecoding.image.S3Uploader;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -70,4 +74,11 @@ public class UserController {
             response.setResult(true);
             return response;
     }
+
+    // 전체 유저 조회
+    @GetMapping("/api/users")
+    public List<UserInfoResponseData> getUsers() {
+        return userService.getUsers();
+    }
 }
+

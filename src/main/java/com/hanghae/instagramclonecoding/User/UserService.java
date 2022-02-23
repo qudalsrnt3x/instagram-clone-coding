@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -115,5 +117,27 @@ public class UserService {
         userRepository.save(user2);
 
         return user2;
+    }
+
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public List<UserInfoResponseData> getUsers() {
+        List<User> userList = userRepository.findAll();
+
+        List<UserInfoResponseData> userInfoResponseDataList = new ArrayList<>();
+
+        for (User user : userList) {
+
+            UserInfoResponseData userInfoResponseData = new UserInfoResponseData(user);
+            userInfoResponseDataList.add(userInfoResponseData);
+        }
+
+        return userInfoResponseDataList;
+    }
+
+    public User findById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("찾는 유저가 없습니다")
+        );
+        return user;
     }
 }

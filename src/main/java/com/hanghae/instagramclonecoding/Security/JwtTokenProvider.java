@@ -1,5 +1,6 @@
 package com.hanghae.instagramclonecoding.Security;
 
+import com.hanghae.instagramclonecoding.User.User;
 import io.jsonwebtoken.*;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class JwtTokenProvider { // 토큰 생성, 검증
     private long tokenValidTime = 24*60*60*1000L;
 
     //토큰에 저장된 유저 정보를 활용해야 하기 때문에 CustomUserDetatilService 라는 이름의 클래스를 만들고 UserDetailsService를 상속받아 재정의 하는 과정을 진행합니다.
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
     // JWT 토큰 생성
     public String createToken(String userPk)
@@ -49,6 +50,12 @@ public class JwtTokenProvider { // 토큰 생성, 검증
     {
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    // JWT 토큰에서 User 가져오기
+    public User getAuthenticationUser(String token){
+        UserDetailsImpl userDetails = userDetailsService.loadUserById(Long.parseLong(this.getUserPk(token)));
+        return userDetails.getUser();
     }
 
 
