@@ -119,7 +119,6 @@ public class UserService {
         return user2;
     }
 
-
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<UserInfoResponseData> getUsers() {
         List<User> userList = userRepository.findAll();
