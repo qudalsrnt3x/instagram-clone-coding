@@ -76,7 +76,7 @@ public class UserController {
     }
 
     // 전체 유저 조회
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public List<UserInfoResponseData> getUsers() {
         return userService.getUsers();
     }
