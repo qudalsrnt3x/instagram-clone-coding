@@ -3,6 +3,7 @@ package com.hanghae.instagramclonecoding.posts;
 
 import com.hanghae.instagramclonecoding.Security.UserDetailsImpl;
 import com.hanghae.instagramclonecoding.User.User;
+import com.hanghae.instagramclonecoding.domain.Dto;
 import com.hanghae.instagramclonecoding.posts.comment.Comment;
 import com.hanghae.instagramclonecoding.posts.comment.CommentRepository;
 import com.hanghae.instagramclonecoding.posts.comment.CommentUserDto;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.transaction.Transactional;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +28,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
     private final LikeRepository likeRepository;
+    private final Dto dto;
 
 
     //글 작성
@@ -53,24 +57,21 @@ public class PostService {
     public List<PostResponseDto> getPost() {
 
         List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
-
+        Dto dtos = dto.getDate();
 
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
-//        List<LikeUserDto> likeUserDtos = new ArrayList<>();
-//        List<CommentUserDto> commentUserDtos = new ArrayList<>();
+
 
         for (Post post : posts)
         {
-
             List<CommentUserDto> commentUserDtos = new ArrayList<>();
             List<LikeUserDto> likeUserDtos = new ArrayList<>();
 
             Long commentCount = commentRepository.countByPost(post);
             Long likeCount = likeRepository.countByPost(post);
 
-            List<Like> likes = likeRepository.findAllByPost(post);
             List<Comment> comments = commentRepository.findAllByPost(post);
-
+            List<Like> likes = likeRepository.findAllByPost(post);
 
             for (Like like : likes)
             {
@@ -83,7 +84,6 @@ public class PostService {
                 commentUserDtos.add(commentUserDto);
             }
 
-
             PostResponseDto postResponseDto = new PostResponseDto(
                     post.getId(),
                     post.getUser().getId(),
@@ -94,11 +94,11 @@ public class PostService {
                     likeCount,
                     commentUserDtos,
                     likeUserDtos,
+                    dtos,
                     post.getUser().getProfileImageUrl(),
                     post.getCreatedAt(),
                     post.getModifiedAt()
             );
-
 
             postResponseDtos.add(postResponseDto);
 
@@ -143,6 +143,7 @@ public class PostService {
 
             List<Like> likes = likeRepository.findAllByPost(post);
             List<Comment> comments = commentRepository.findAllByPost(post);
+            Dto dtos = dto.setDate(new Date());
 
             for (Like like : likes)
             {
@@ -166,6 +167,7 @@ public class PostService {
                     likeCount,
                     commentUserDtos,
                     likeUserDtos,
+                    dtos,
                     post.getUser().getProfileImageUrl(),
                     post.getCreatedAt(),
                     post.getModifiedAt()
