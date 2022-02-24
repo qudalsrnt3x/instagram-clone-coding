@@ -9,6 +9,7 @@ import com.hanghae.instagramclonecoding.User.ResponseDto.LoginResponseDto;
 import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseData;
 import com.hanghae.instagramclonecoding.User.ResponseDto.UserInfoResponseDto;
 import com.hanghae.instagramclonecoding.domain.Response;
+import com.hanghae.instagramclonecoding.handler.ex.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class UserService {
 
         // 있다면 예외 처리
         if (found.isPresent()) {
-            throw new IllegalArgumentException("중복된 사용자 ID 가 존재합니다.");
+            throw new DuplicateEmailException();
         }
 
         // 비밀번호 암호화
@@ -55,11 +56,11 @@ public class UserService {
     public LoginResponseDto login(LoginRequestDto requestDto) {
         // id가 없다면 예외 처리
         User user = userRepository.findByEmail(requestDto.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 ID 입니다."));
+                .orElseThrow(EmailNotFoundException::new);
 
         // 비밀번호가 다르다면 예외 처리
         if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("비밀번호를 다시 확인해 주세요.");
+            throw new PasswordNotCollectException();
         }
 
         // response ( true, token값 ) 반환
@@ -105,11 +106,11 @@ public class UserService {
 //        }
 
         User user1 = userRepository.findById(user.getId()).orElseThrow(
-                () -> new IllegalArgumentException("해당 유저 없음"));
+                UserNotFoundException::new);
 
         // 유저 정보 변경
         if (profileChangeRequestDto.getProfileImageUrl() == null) {
-            throw new IllegalArgumentException("프로필을 입력해주세요.");
+            throw new ProfileNotFoundException();
         }
 
         User user2 = new User(profileChangeRequestDto, user1);
@@ -132,12 +133,5 @@ public class UserService {
         }
 
         return userInfoResponseDataList;
-    }
-
-    public User findById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(
-                ()-> new IllegalArgumentException("찾는 유저가 없습니다")
-        );
-        return user;
     }
 }

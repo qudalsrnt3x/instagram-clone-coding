@@ -71,7 +71,7 @@ public class CommentService {
         List<Comment> test = commentRepository.findByPostIdOrderByModifiedAtDesc(postId);
         for (Comment co : test) {
             CommentResponseDto commentResponseDto = new CommentResponseDto(co);
-            System.out.println(co.getContent());
+            //System.out.println(co.getContent());
             responseDto.add(commentResponseDto);
         }
         return responseDto;

@@ -1,4 +1,4 @@
-package com.hanghae.instagramclonecoding.Exception;
+package com.hanghae.instagramclonecoding.handler;
 
 import lombok.Getter;
 import lombok.Setter;
