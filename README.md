@@ -1,6 +1,5 @@
 # 👀 인스타그램 클론코딩 (Back-End)
-
-![img.png](img.png)
+![](img.png)
 
 >**인스타그램 클론코딩**
 
@@ -75,8 +74,7 @@
 </div>
 
 ### Version Control
-
-![img.png](img.png)![img_1.png](img_1.png)
+![](img_1.png)![](img2.png)
 
 
 <br />
