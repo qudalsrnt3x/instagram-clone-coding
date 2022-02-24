@@ -16,15 +16,15 @@
 ### [BACK_END] 
 🧑🏻‍💻 [박재균](https://github.com/JaeGyoon/) <br/>
 
-- 프로젝트 셋팅 및 배포(AWS), 로그인/회원가입 구현, JWT 인증
+-  로그인/회원가입 구현, JWT 인증
 
 🧑🏻‍💻 [이규진](https://github.com/Dean404) <br/>
 
-- 댓글 CRUD 구현, 테스트, 코드 리팩토링
+- 게시글 및 댓글 CRUD 구현, 이미지 업로드 구현
 
 🧑🏻‍💻 [문병민](https://github.com/qudalsrnt3x) <br/> 
 
-- 게시글 CRUD 구현, 이미지 파일 등록(S3) 구현, 테스트 작성
+- 프로젝트 셋팅 및 배포(AWS), 예외처리
 
 ### [FRONT-END] 
 🧑🏻‍💻 [차민재](https://github.com/letminjae) <br/>
