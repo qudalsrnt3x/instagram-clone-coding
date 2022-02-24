@@ -11,10 +11,12 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Data
 public class CommentResponseDto {
+    private Long commentId;
     private String nickname;
     private String content;
 
     public CommentResponseDto(Comment comment) {
+        this.commentId = comment.getId();
         this.nickname = comment.getUser().getNickname();
         this.content = comment.getContent();
     }
